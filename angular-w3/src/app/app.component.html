@@ -1,0 +1,24 @@
+<div class="main">
+    
+    <div class="note">
+        <input [(ngModel)]="tempTitle" type="text" placeholder="Заглавие на бележката">
+        <div> <input [(ngModel)]="tempContent" type="text" placeholder="Текст"> </div>
+        <button (click)="SaveButton()">Съхрани бележката</button>
+        @if(tempTitle.length<5){
+            <div>Заглавието трябва да бъде по-дълго от 5 символа</div>
+        }
+        @if(tempContent.length<7){
+            <div>Съдържанието трябва да бъде по-дълго от 7 символа</div>
+        }
+    </div>
+
+    @for (element of NoteCollection; track $index){
+        <div (click)="NoteSelect($index)">{{element.title}}</div>
+        <div (click)="NoteSelect($index)">{{element.content}}</div>
+    }
+
+    @if(isSelected){
+        <button (click)="SaveEdit()">Запази промените в бележката</button>
+        <button (click)="DeleteNote()">Изтрии</button>
+    }
+</div>
